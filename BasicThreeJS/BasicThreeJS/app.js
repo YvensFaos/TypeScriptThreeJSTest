@@ -16,7 +16,8 @@ var ThreeJSTest = (function () {
         this.sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
         this.sphere.position = new THREE.Vector3(0, 0, 0);
         this.scene.add(this.sphere);
-        this.scene.add(new THREE.AmbientLight(new THREE.Color(0.9, 0.9, 0.9).getHex()));
+        this.ambientLight = new THREE.AmbientLight(new THREE.Color(0.9, 0.9, 0.9).getHex());
+        this.scene.add(this.ambientLight);
         this.renderer.render(this.scene, this.camera);
         this.rotationSpeed = 0.01;
     }
@@ -28,6 +29,10 @@ var ThreeJSTest = (function () {
     };
     ThreeJSTest.prototype.changeFOV = function (value) {
         this.camera.fov = value;
+    };
+    ThreeJSTest.prototype.changeColorIntensity = function (value) {
+        value = value / 100;
+        this.ambientLight.color = new THREE.Color(value * 1.0, value * 1.0, value * 1.0);
     };
     ThreeJSTest.prototype.render = function () {
         var _this = this;

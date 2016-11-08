@@ -5,6 +5,8 @@ class ThreeJSTest {
     scene: THREE.Scene;
     camera: THREE.PerspectiveCamera;
     sphere: THREE.Mesh;
+    ambientLight: THREE.AmbientLight;
+
     rotationSpeed: number;
 
     constructor() {
@@ -21,7 +23,6 @@ class ThreeJSTest {
         this.camera.lookAt(new THREE.Vector3(0, 0, 0));
 
         var sphereGeometry = new THREE.SphereGeometry(5, 20, 20);
-
         var sphereMaterial = new THREE.MeshPhongMaterial(
             {
                 map: THREE.ImageUtils.loadTexture("leo_sphere.jpg")
@@ -31,7 +32,8 @@ class ThreeJSTest {
         this.sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
         this.sphere.position = new THREE.Vector3(0, 0, 0);
         this.scene.add(this.sphere);
-        this.scene.add(new THREE.AmbientLight(new THREE.Color(0.9, 0.9, 0.9).getHex()));
+        this.ambientLight = new THREE.AmbientLight(new THREE.Color(0.9, 0.9, 0.9).getHex());
+        this.scene.add(this.ambientLight);
         this.renderer.render(this.scene, this.camera);
 
         this.rotationSpeed = 0.01;
@@ -47,6 +49,11 @@ class ThreeJSTest {
 
     changeFOV(value: number) {
         this.camera.fov = value;
+    }
+
+    changeColorIntensity(value: number) {
+        value = value / 100;
+        this.ambientLight.color = new THREE.Color(value * 1.0, value * 1.0, value * 1.0);
     }
 
     render() {
