@@ -6,8 +6,38 @@
     <title>ThreeJS Test</title>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/three.js/r67/three.js"></script>
     <script src="app.js"></script>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            function refreshSpeed() {
+                var value = $("#slider-speed").slider("value");
+                three.changeSpeed(value);
+            }
+
+            $("#slider-speed").slider({
+                orientation: "horizontal",
+                range: "min",
+                min: 1,
+                max: 100,
+                value: 1,
+                slide: refreshSpeed
+            });
+
+            $("slider-speed").slider("value", 2);
+        });
+    </script>
 </head>
 <body>
-    <div id="content" style="width:500px;height:500px;align-self:center"></div>
-</body>
+    <div id="actual-page" style="width: 800px;height:505px;align-self:center; background-color:#F7F7F7;">
+        <div id="controls" style="width:280px; height:500px; float:right;margin-left: 10px;">
+            <div>Rotation Speed Slider</div>
+            <div id="slider-speed" onchange="refreshSpeed();"></div>
+        </div>
+        <div id="content" style="width:500px; height:500px;align-items :center; position:center;"> 
+        </div>
+    </div>
+        </body>
 </html>
