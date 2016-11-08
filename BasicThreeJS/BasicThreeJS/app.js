@@ -26,10 +26,14 @@ var ThreeJSTest = (function () {
     ThreeJSTest.prototype.changeSpeed = function (value) {
         this.rotationSpeed = value / 100;
     };
+    ThreeJSTest.prototype.changeFOV = function (value) {
+        this.camera.fov = value;
+    };
     ThreeJSTest.prototype.render = function () {
         var _this = this;
         requestAnimationFrame(function () { return _this.render(); });
         this.rotateSphere();
+        this.camera.updateProjectionMatrix();
         this.renderer.render(this.scene, this.camera);
     };
     ThreeJSTest.prototype.start = function () {

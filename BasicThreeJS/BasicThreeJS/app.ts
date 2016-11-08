@@ -3,7 +3,7 @@
 class ThreeJSTest {
     renderer: THREE.WebGLRenderer;
     scene: THREE.Scene;
-    camera: THREE.Camera;
+    camera: THREE.PerspectiveCamera;
     sphere: THREE.Mesh;
     rotationSpeed: number;
 
@@ -16,9 +16,7 @@ class ThreeJSTest {
         document.getElementById('content').appendChild(this.renderer.domElement);
 
         this.scene = new THREE.Scene();
-
         this.camera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
-
         this.camera.position = new THREE.Vector3(0, 0, -20);
         this.camera.lookAt(new THREE.Vector3(0, 0, 0));
 
@@ -31,11 +29,8 @@ class ThreeJSTest {
         );
 
         this.sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
-
         this.sphere.position = new THREE.Vector3(0, 0, 0);
-
         this.scene.add(this.sphere);
-
         this.scene.add(new THREE.AmbientLight(new THREE.Color(0.9, 0.9, 0.9).getHex()));
         this.renderer.render(this.scene, this.camera);
 
@@ -50,9 +45,14 @@ class ThreeJSTest {
         this.rotationSpeed = value / 100;
     }
 
+    changeFOV(value: number) {
+        this.camera.fov = value;
+    }
+
     render() {
         requestAnimationFrame(() => this.render());
         this.rotateSphere();
+        this.camera.updateProjectionMatrix();
         this.renderer.render(this.scene, this.camera);
     }
 
