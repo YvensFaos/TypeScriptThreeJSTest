@@ -3,13 +3,59 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>TypeScript HTML App</title>
-    <link rel="stylesheet" href="app.css" type="text/css" />
+    <title>ThreeJS Test</title>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/three.js/r67/three.js"></script>
     <script src="app.js"></script>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            function refreshFOV() {
+                var value = $("#slider-fov").slider("value");
+                three.changeFOV(value);
+            }
+
+            $("#slider-fov").slider({
+                orientation: "horizontal",
+                range: "min",
+                min: 5,
+                max: 160,
+                value: 5,
+                slide: refreshFOV
+            });
+
+            $("slider-fov").slider("value", 5);
+
+            function refreshIntensity() {
+                var value = $("#slider-intensity").slider("value");
+                three.changeColorIntensity(value);
+            }
+
+            $("#slider-intensity").slider({
+                orientation: "horizontal",
+                range: "min",
+                min: 0,
+                max: 200,
+                value: 80,
+                slide: refreshIntensity
+            });
+
+            $("slider-intensity").slider("value", 80);
+        });
+    </script>
 </head>
 <body>
-    <h1>TypeScript HTML App</h1>
-
-    <div id="content"></div>
+    <div id="actual-page" style="width: 800px;height:505px;align-self:center; background-color:#F7F7F7;">
+        <div id="controls" style="width:280px; height:500px; float:right;margin-left: 10px;">
+            <div>Camera's FOV</div>
+            <div id="slider-fov" onchange="refreshFOV();"></div>
+            <div>Ambient Light's Intensity</div>
+            <div id="slider-intensity" onchange="refreshIntensity();"></div>
+        </div>
+        <div id="content" style="width:500px; height:500px;align-items :center; position:center;">
+        </div>
+    </div>
 </body>
 </html>
