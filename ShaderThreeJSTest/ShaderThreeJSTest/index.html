@@ -14,6 +14,7 @@
         $(function () {
             function refreshFOV() {
                 var value = $("#slider-fov").slider("value");
+                console.log(value);
                 three.changeFOV(value);
             }
 
@@ -22,11 +23,11 @@
                 range: "min",
                 min: 5,
                 max: 160,
-                value: 25,
+                value: 12,
                 slide: refreshFOV
             });
 
-            $("slider-fov").slider("value", 25);
+            $("slider-fov").slider("value", 12);
 
             function refreshIntensity() {
                 var value = $("#slider-intensity").slider("value");
@@ -42,8 +43,13 @@
                 slide: refreshIntensity
             });
 
-            //$("slider-intensity").slider("value", 80);
+            $("slider-intensity").slider("value", 80);
         });
+
+        function changeTextureClick() {
+            three.changeTexture("earth_sphere.jpg");
+
+        }
     </script>
 </head>
 <body>
@@ -53,16 +59,10 @@
             <div id="slider-fov" onchange="refreshFOV();"></div>
             <div>Ambient Light's Intensity</div>
             <div id="slider-intensity" onchange="refreshIntensity();"></div>
+            <div>Change Texture to "earth_sphere"</div>
+            <div><input type="button" onclick="changeTextureClick();" value="Change Texture"/> </div>
         </div>
         <div id="content" style="width:500px; height:500px;align-items :center; position:center;">
-            <script>
-                $(function () {
-                    var value = $("#slider-fov").slider("value");
-                    three.changeFOV(value);
-                    value = $("#slider-intensity").slider("value");
-                    three.changeColorIntensity(value)
-                });
-            </script>
         </div>
     </div>
 </body>
