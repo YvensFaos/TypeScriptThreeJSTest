@@ -40,12 +40,10 @@ class ThreeJSTest {
             new THREE.Vector2(0, 0)
         ];
 
-        squareGeometry.faceVertexUvs[0][0] = [bricks[0], bricks[1], bricks[3]];
-        squareGeometry.faceVertexUvs[0][1] = [bricks[1], bricks[2], bricks[3]];
+        squareGeometry.faceVertexUvs[0][0] = [bricks[0], bricks[1], bricks[2]];
+        squareGeometry.faceVertexUvs[0][1] = [bricks[0], bricks[2], bricks[3]];
 
         var leoTexture = THREE.ImageUtils.loadTexture("leo_sphere.jpg");
-        //leoTexture.min_filter = THREE.LinearFilter; 
-        //leoTexture.mag_filter = THREE.LinearFilter; 
         leoTexture.wrapS = THREE.RepeatWrapping; 
         leoTexture.wrapT = THREE.RepeatWrapping; 
         leoTexture.repeat.x = 1; 
